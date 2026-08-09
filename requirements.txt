@@ -1,3 +1,2 @@
-.go-version
-Go
-apk
+Flask==3.1.0
+pytest==8.3.5
