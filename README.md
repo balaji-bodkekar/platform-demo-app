@@ -12,7 +12,7 @@ A simple Flask application used to build an Internal Developer Platform.
 ```bash
 python app.py
 
-#Run with Docker
+##Run with Docker
 
 docker build -t platform-demo:1.0 .
 docker run -p 8080:8080 platform-demo:1.0
