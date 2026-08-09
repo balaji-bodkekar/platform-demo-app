@@ -38,7 +38,7 @@ jobs:
       - name: Debug GitHub OIDC
         run: |
             echo "Repository: $GITHUB_REPOSITORY"
-            cho "Ref: $GITHUB_REF"
+            echo "Ref: $GITHUB_REF"
             echo "Event: $GITHUB_EVENT_NAME"
 
       - name: Configure AWS credentials
