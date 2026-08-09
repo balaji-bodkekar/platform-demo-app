@@ -9,6 +9,10 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -31,6 +35,21 @@ jobs:
         run: |
           python -m pytest
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::828562155228:role/github-actions-ecr-role
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
       - name: Build Docker image
         run: |
-          docker build -t platform-demo:${{ github.sha }} .
+          docker build \
+            -t 828562155228.dkr.ecr.us-east-1.amazonaws.com/platform-engineering:${{ github.sha }} .
+
+      - name: Push Docker image
+        run: |
+          docker push \
+            828562155228.dkr.ecr.us-east-1.amazonaws.com/platform-engineering:${{ github.sha }}
